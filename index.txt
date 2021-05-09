@@ -1,2 +1,2 @@
 Hello ! I am Jenkins.
-test 1
+test 2
