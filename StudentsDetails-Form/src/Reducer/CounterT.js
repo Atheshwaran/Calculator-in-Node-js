@@ -1,8 +1,8 @@
-const counter = (count=1, action) => {
+const counterT = (count=1, action) => {
 
     switch (action.type) {
 
-        case "Increment":
+        case "IncrementT":
             return ++count;
 
         default:
@@ -11,4 +11,4 @@ const counter = (count=1, action) => {
     }
 }
 
-export default counter;
+export default counterT;

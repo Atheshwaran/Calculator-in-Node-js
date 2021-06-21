@@ -1,54 +1,112 @@
-import React, { useState } from 'react';
-import { states, counter } from '../Actions/Action';
+import React, { useState, useEffect } from 'react';
+import TeacherForm from './TeacherForm';
+import StudentForm from './StudentForm';
+import DisplayTeachers from './DisplayTeachers';
+import DisplayStudents from './DisplayStudents';
+import { showFormT, showFormS, counterT, statesT } from '../Actions/Action';
 import { useSelector, useDispatch } from 'react-redux';
+
+
 
 function Data() {
 
-    const [name, setName] = useState("");
-    const [age, setAge] = useState("");
-
-    const [data, setData] = useState( [] );
 
     const dispatch = useDispatch();
 
-    const state = useSelector((state) => state.student);
-    const count = useSelector((state) => state.count);
 
-    const InputFunc = (e) => {
-        const fieldName = e.target.name;
-        const value = e.target.value;
-        
+    const stateT = useSelector((state) => state.teacher);
+    const stateS = useSelector((state) => state.student);
+    const showTeacher = useSelector((state) => state.showT);
+    const showStudent = useSelector((state) => state.showS);
+    const count = useSelector((state) => state.countT);
+
+    const [allData, setValue] = useState(false);
+
+
+
+
+    // const names = useSelector((state) => state.name);
+
+    let field;
+
+    useEffect(() => {
+        console.log(stateT);
+    }, [stateT])
+
+    useEffect(() => {
+        console.log(stateS);
+    }, [stateS])
+
+    const getData = (option) => {
+        field = (option === 'Teacher') ? "Teacher" : (option === 'Student') ? "Student" : "";
+        console.log(field);
+        if (field === 'Teacher'){
+            dispatch(showFormT(!showTeacher));
+          }
+        if (field === 'Student'){
+            dispatch(showFormS(!showStudent));
+           }
+        setTimeout(() => {
+            console.log("dispT 2 = ", showTeacher);
+            console.log("dispS 2 = ", showStudent);
+        }, 1000)
+
     }
 
-    const addStudent = (e) => {
-        e.preventDefault();
-        setData([...data, {Id: count, Name: name, Age: age}]);
-        dispatch(states(data));
-        dispatch(counter(count));
-        setName("");
-        setAge("");
+    const handler = (e) => {
+        getData(e.target.value);
     }
- console.log(count);
-    console.log(state);
+
+    // const ShowForm = () =>{
+    //     if(field === 'Teacher')
+    //     return (<div > <TeacherForm /> </div>)
+    //     else if(field === 'Student')
+    //     return <StudentForm />
+    // }
+
+    // console.log(Components);
+
+
+    const displayData = () => {
+        setValue('true');
+    }
 
     return (
- 
+
         <>
-        <h1> Welcome to ABC Schools </h1>
-        <h2> Enter student datas in below form</h2>
+            <h1> Welcome to ABC Schools </h1>
 
-        <form  onSubmit = {addStudent}>
+            {
+                (!allData) ?
+                    (<>
+                        <select onChange={handler} >
+                            <option> select </option>
+                            <option value='Teacher'  > Teacher </option>
+                            <option value='Student' > Student </option>
+                        </select>
 
-            Name:  <input type='text' placeholder='Enter your name' name='name' value={name}  onChange={(e) => setName(e.target.value)} />
-            Age: <input type='number' placeholder='Enter your age' name='age' value={age} onChange={(e) => setAge(e.target.value)} />
+                        <button type='submit' onClick={displayData} > Finish </button>
+                    </>) : ""
+            }
 
-            <button type='submit' > Submit </button>
+            {/* {ShowForm} */}
+            {/* <div> <Field /> </div> */}
 
-        </form>
+            {/* {console.log(showTeacher)} */}
 
-     
+            {console.log("dispT 1= ", showTeacher)}
+            {console.log("dispS 1= ", showStudent)}
 
-    </> 
+            {showTeacher ? <TeacherForm status={allData} /> : ""}
+            {showStudent ? <StudentForm status={allData} /> : ""}
+
+
+            {console.log(allData)}
+            {(allData) ? <DisplayTeachers /> : ""}
+            {allData ? <DisplayStudents /> : ""}
+
+
+        </>
 
     )
 

@@ -1,0 +1,25 @@
+table{
+    border: 4px solid rgb(253, 92, 232);
+    width: auto;
+    text-align: center;
+    margin-top: 25px;
+   padding: 5px;
+}
+ 
+th{
+    border: 3px solid seagreen ;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+tr{
+    margin-top: 20px;
+}
+
+td{
+    border: 2px solid rgb(248, 143, 6);
+    margin: 25px;
+    color:rgb(0, 4, 255);
+    padding: 5px;
+    width: auto;
+}

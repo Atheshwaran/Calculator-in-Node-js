@@ -1,42 +1,36 @@
-export const name = (name) => {
 
-    return { type: "Name", payload: name };
+export const statesT = (state) => {
 
-}
-
-export const standard = (clas) => {
-
-    return { type: "Class", payload: clas };
+    return { type: "UpdateT", payload: state };
 
 }
 
-export const dob = (dob) => {
+export const counterT = () => {
 
-    return { type: "Dob", payload: dob };
-
-}
-
-export const age = (age) => {
-
-    return { type: "Age", payload: age };
+    return { type: "IncrementT" };
 
 }
 
-export const phone = (phone) => {
+export const statesS = (state) => {
 
-    return { type: "Phone", payload: phone };
-
-}
-
-export const states = (state) => {
-
-    return { type: "Update", payload: state };
+    return { type: "UpdateS", payload: state };
 
 }
 
-export const counter = () => {
+export const counterS = () => {
 
-    return { type: "Increment"};
+    return { type: "IncrementS" };
 
 }
 
+export const showFormT = (show) => {
+
+    return { type: "DisplayFormT", payload: show };
+
+}
+
+export const showFormS = (show) => {
+
+    return { type: "DisplayFormS", payload: show };
+
+}
