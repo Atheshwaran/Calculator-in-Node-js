@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { statesT, counterT } from '../Actions/Action';
+import { statesT, counterT, showFormT } from '../Actions/Action';
 import CheckBox from './CheckBox';
 import { useSelector, useDispatch } from 'react-redux';
-import { Formik, Form, Field } from 'formik';
+// import { Formik, Form, Field } from 'formik';
 
 function TeacherForm(props) {
 
@@ -11,7 +11,6 @@ function TeacherForm(props) {
     const [subject, setSubject] = useState("");
     const [status, setStatus] = useState("");
     const [phone, setPhone] = useState("");
-    const [data, setData] = useState([]);
 
     const stateT = useSelector((state) => state.teacher)
     const count = useSelector((state) => state.countT);
@@ -22,12 +21,8 @@ function TeacherForm(props) {
 
     const addStudent = (e) => {
         e.preventDefault();
-        //dispatch(states([...data]));
-        //setData([...data, { Id: count, Name: name, Class: standard, Subject: subject, Status: status, Phone: phone }]);
         dispatch(statesT([...stateT, { Id: count, Name: name, Class: standard, Subject: subject, Status: status, Phone: phone }]));
         console.log("Data = ", stateT.length);
-        // dispatch(statesT([...data]));
-        // console.log("Data = ", data);
         dispatch(counterT(count));
         setName("");
         setClass("");
@@ -49,14 +44,13 @@ function TeacherForm(props) {
         setClass(classes);
     }
 
-    const addStatus = (status) => {
-        setStatus(status);
-    }
+
 
     const myFunc = (e) => {
-        //    document.getElementsByName("myForm").reset();
 
         setCheck(true);
+        dispatch(showFormT(false));
+        props.changeField("")
     }
 
     return (<>
@@ -70,11 +64,11 @@ function TeacherForm(props) {
 
                         Name:  <input type='text' placeholder='Enter your name' name='name' value={name} onChange={(e) => setName(e.target.value)} /> <br />
 
-                        <CheckBox status={checkStatus} changeCheck={setCheck} subject={subject} subValue={addSubject} standard={standard} classValue={addClass} flexibility={status} statusValue={addStatus} />
+                        <CheckBox status={checkStatus} changeCheck={setCheck} subject={subject} subValue={addSubject} standard={standard} classValue={addClass} />
 
-                        {/* Status:
-                        <input type='radio' value='Available'   checked={!checkStatus} onChange={(e) => setStatus(e.target.value)} /> <label>Available </label>
-                        <input type='radio' value={status.UnAvailable} onChange={(e) => setStatus(e.target.value)} /> <label>Un-Available </label> <br /> */}
+                        Status:
+                        <input type='radio' name='status' value='Available' onChange={(e) => setStatus(e.target.value)} /> <label>Available </label>
+                        <input type='radio' name='status' value='UnAvailable' onChange={(e) => setStatus(e.target.value)} /> <label>Un-Available </label> <br />
 
                         Phone: <input type='number' placeholder='Enter your phone number' name='phone' value={phone} onChange={(e) => setPhone(e.target.value)} /> <br />
 

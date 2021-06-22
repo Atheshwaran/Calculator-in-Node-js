@@ -3,7 +3,7 @@ const showS = (showFormS= false, action) => {
     switch (action.type) {
 
         case "DisplayFormS":
-            return {showFormS: action.payload};
+            return  action.payload;
 
         default:
             return showFormS;

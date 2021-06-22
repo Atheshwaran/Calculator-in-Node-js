@@ -18,16 +18,14 @@ function Data() {
     const stateS = useSelector((state) => state.student);
     const showTeacher = useSelector((state) => state.showT);
     const showStudent = useSelector((state) => state.showS);
-    const count = useSelector((state) => state.countT);
 
     const [allData, setValue] = useState(false);
 
 
 
-
     // const names = useSelector((state) => state.name);
 
-    let field;
+    let [field, setField] = useState("");
 
     useEffect(() => {
         console.log(stateT);
@@ -38,18 +36,19 @@ function Data() {
     }, [stateS])
 
     const getData = (option) => {
-        field = (option === 'Teacher') ? "Teacher" : (option === 'Student') ? "Student" : "";
+        setField((option === 'Teacher') ? "Teacher" : (option === 'Student') ? "Student" : "");
         console.log(field);
-        if (field === 'Teacher'){
-            dispatch(showFormT(!showTeacher));
-          }
-        if (field === 'Student'){
-            dispatch(showFormS(!showStudent));
-           }
-        setTimeout(() => {
-            console.log("dispT 2 = ", showTeacher);
-            console.log("dispS 2 = ", showStudent);
-        }, 1000)
+        if (field === 'Teacher') {
+            dispatch(showFormT(true));
+
+        }
+        if (field === 'Student') {
+            dispatch(showFormS(true));
+        }
+        // setTimeout(() => {
+        console.log("dispT 2 = ", showTeacher);
+        console.log("dispS 2 = ", showStudent);
+        // }, 1000)
 
     }
 
@@ -57,15 +56,9 @@ function Data() {
         getData(e.target.value);
     }
 
-    // const ShowForm = () =>{
-    //     if(field === 'Teacher')
-    //     return (<div > <TeacherForm /> </div>)
-    //     else if(field === 'Student')
-    //     return <StudentForm />
-    // }
 
-    // console.log(Components);
-
+    const arr = ["Select", "Teacher", "Student"]
+    // let [result, setResult] = useState("");
 
     const displayData = () => {
         setValue('true');
@@ -79,26 +72,24 @@ function Data() {
             {
                 (!allData) ?
                     (<>
-                        <select onChange={handler} >
-                            <option> select </option>
-                            <option value='Teacher'  > Teacher </option>
-                            <option value='Student' > Student </option>
+                        <select onClick={handler}  >{
+                            arr.map((roll, index) => {
+                                return (<option value={roll}> {roll} </option>)
+                            })
+                        }
+
                         </select>
 
                         <button type='submit' onClick={displayData} > Finish </button>
                     </>) : ""
             }
 
-            {/* {ShowForm} */}
-            {/* <div> <Field /> </div> */}
-
-            {/* {console.log(showTeacher)} */}
 
             {console.log("dispT 1= ", showTeacher)}
             {console.log("dispS 1= ", showStudent)}
 
-            {showTeacher ? <TeacherForm status={allData} /> : ""}
-            {showStudent ? <StudentForm status={allData} /> : ""}
+            {field === 'Teacher' && showTeacher ? <TeacherForm status={allData} changeField={setField} /> : ""}
+            {field === 'Student' && showStudent ? <StudentForm status={allData} changeField={setField} /> : ""}
 
 
             {console.log(allData)}

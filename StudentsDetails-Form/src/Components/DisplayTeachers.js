@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Table from './Data.css';
 import { useSelector } from 'react-redux';
+import { statesT } from '../Actions/Action';
 
 
 function DisplayTeachers() {
 
     const stateT = useSelector((state) => state.teacher);
-    const [result, setResult] = useState("");
+    let [result, setResult] = useState("");
 
     const getData = (index) => {
         setResult(stateT[index]);
@@ -16,6 +17,8 @@ function DisplayTeachers() {
     const handler = (e) => {
         getData(e.target.value);
     }
+    if (result === "" && stateT.length > 0)
+        setResult(stateT[0])
 
     return (
         <>
@@ -24,18 +27,20 @@ function DisplayTeachers() {
 
             <div>
                 {
-                    <select onClick={handler}>{
+                    <select onChange={handler}>{
                         stateT.map((teacher, index) => {
 
                             return (<option value={index} > {teacher.Name} </option>)
 
                         })
+
                     }
+
                     </select>
                 }
             </div>
 
-            <table className={Table}>
+            <table className={Table} >
                 <tbody>
                     <tr>
                         <th>Id</th>
