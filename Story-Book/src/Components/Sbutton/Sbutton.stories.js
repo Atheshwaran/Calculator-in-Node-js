@@ -19,6 +19,7 @@ export default {
       control: 'select'
     },
 
+    status: { control: {type: 'boolean'} }
   }
 };
 
