@@ -5,17 +5,13 @@ export default {
     title: 'Table',
     component: Table,
 
-    // argTypes: {
-    //          User : [],
+    argTypes: {
+             User : {control: {type: 'array'}},
+             Description: { control: {type: 'text'}}
             
-    // }
+    }
 
 }
-
-
-// export const Primary = () => <Table variant ='primary'> Check </Table>
-// export const DataPresent = () => <Table variant ='datapresent'> Data Present </Table>
-// export const NoData = () => <Table variant ='nodata'> No Data </Table>
 
 
 const Template = args => <Table  {...args} />

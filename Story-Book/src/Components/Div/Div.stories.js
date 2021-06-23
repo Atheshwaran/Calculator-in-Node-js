@@ -7,19 +7,19 @@ export default {
 
     argTypes: {
 
-        Border_Color: "",
-        Border_Radius: "",
-        Bagrounnd_Color: "",
+        Border_Color: { control: {matchers: {color : /(baground|color)$/i}} },
+        Border_Radius: { control: {type: 'text'} },
+        Bagrounnd_Color: { control: {matchers: {color : /(baground|color)$/i}} },
 
         Font_Family: {
             options: ["Arial", "fantasy", "monospace", "serif"],
             control: { type: 'radio' }
         },
 
-        Font_Size: "",
-        Width: "",
-        Height: "",
-        Padding: "",
+        Font_Size: { control: {type: 'text'} },
+        Width: { control: {type: 'text'} },
+        Height: { control: {type: 'text'} },
+        Padding: { control: {type: 'text'} },
 
     }
 

@@ -1,23 +1,39 @@
-import React from 'react';
-import Input from './Input';
+import React from "react";
+import Button from './Sbutton';
+
 
 export default {
-    title: 'Input',
-    component: Input
-}
 
-// export const Text = () => <Input type = 'text' />
-// export const Password = () => <Input type = 'password' />
+  title: 'SButton',
+  component: Button,
+
+  argTypes: {
+    
+    variant: {
+      options: ['primary', 'secondary', 'success', 'reject'],
+      control: { type: 'radio' }
+    },
+
+    name: {
+      options: ['Login', 'Logout', 'Register'],
+      control: 'select'
+    },
+
+    status: { control: {type: 'boolean'}}
+
+  }
+};
 
 
-const Template = args => <Input {...args} />
+const Template = args => <Button  {...args} />
 
-export const  Text = Template.bind({});
-Text.args = {
-    type: "text"
-}
+export const Click_button = Template.bind({});
+Click_button.args = {
+  variant: 'primary',
+  name: 'Login',
+  status: false
+};
 
-export const  Password = Template.bind({});
-Password.args = {
-    type: "password"
-}
+
+
+
